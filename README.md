@@ -2,6 +2,8 @@
 
 Background Modeling and Suppression based on Multi-Feature Generalized Zero-Shot Learning for infrared weak-target images.
 
+---
+
 ## Introduction
 
 Reliable background suppression remains a key challenge in infrared imaging for space and aerial scientific visual learning. Infrared images are often affected by environmental variability, radiometric inconsistency, sensor noise, non-uniform background radiation, and star-like interference. These factors make it difficult for conventional models to learn stable background characteristics and maintain robust target-background discrimination.
@@ -11,6 +13,8 @@ This repository provides the core implementation of **BMS-MFZS**, a background m
 The method also introduces temporal and spectral physical features as auxiliary information within the GZSL framework. These auxiliary features improve target-background discrimination by providing motion continuity and physical response differences. A joint semantic-pixel background reconstruction module is further designed to combine global semantic background modeling with local pixel-level refinement.
 
 The released code includes the main model, training and testing scripts, physical auxiliary feature analysis, semantic-pixel background reconstruction, and background suppression evaluation.
+
+---
 
 ## Main Components
 
@@ -23,6 +27,8 @@ BMS-MFZS contains the following modules:
 - Semantic-pixel background reconstruction
 - Adaptive infrared background suppression
 - Physical feature-space interpretability analysis
+
+---
 
 ## Project Structure
 
@@ -57,39 +63,302 @@ BMS-MFZS/
     ├── input/
     ├── reconstruction_results/
     └── suppression_results/
+```
+
+---
 
 ## Code Description
+
+The following table gives a brief description of the released code files and their correspondence to the proposed BMS-MFZS framework.
 
 ### Core Framework
 
 | File | Description |
 |---|---|
-| `model.py` | Defines the main BMS-MFZS network. It integrates image features, semantic label features, temporal features, spectral features, cross-modal alignment, GZSL mapping, and final background suppression branches. |
-| `train.py` | Training script for BMS-MFZS. It loads the training data, builds the model, computes the training loss, updates network parameters, and saves trained checkpoints. |
-| `test-zero shot.py` | Testing script for generalized zero-shot inference. It loads the trained model, predicts seen and unseen background categories, and outputs background suppression results. |
-| `con_test.py` | Evaluation and comparison script for background suppression. It is mainly used to calculate contrast-related indicators and generate suppression results for experimental comparison. |
-| `utils.py` | Provides common utility functions used in training, testing, data loading, feature processing, and result saving. |
+| `model.py` | Defines the main BMS-MFZS framework, including image feature extraction, semantic embedding, temporal and spectral auxiliary feature fusion, GZSL-based background modeling, and adaptive background suppression. |
+| `train.py` | Training script of BMS-MFZS. It loads training data, builds the network, computes optimization losses, updates parameters, and saves trained checkpoints. |
+| `test-zero shot.py` | Testing and generalized zero-shot inference script. It performs background modeling, unseen-category inference, and infrared background suppression evaluation. |
+| `con_test.py` | Evaluation script for suppression performance comparison. It generates suppression results and computes contrast-related evaluation metrics. |
+| `utils.py` | Utility functions used for data loading, feature processing, model initialization, evaluation, and result saving. |
 
 ### Feature Extraction Modules
 
 | File | Description |
 |---|---|
-| `image_feature_extraction.py` | Implements infrared image feature extraction. The module extracts spatial grayscale and local structural features from infrared images using convolutional feature encoding. |
-| `text_feature_extraction.py` | Implements semantic label feature extraction. Target and background labels are embedded into a semantic feature space and used for GZSL-based background modeling. |
-| `time_feature_extraction.py` | Implements temporal feature extraction. The module models inter-frame variation and temporal continuity of infrared targets and backgrounds. |
-| `spectrum_feature_extraction.py` | Implements spectral auxiliary feature extraction. It encodes spectral or emissivity-related physical features to enhance target-background discrimination. |
-| `transformer_network.py` | Provides the Transformer-based encoder used for spectral sequence modeling and feature representation learning. |
+| `image_feature_extraction.py` | Implements infrared image feature extraction using convolutional feature encoding to capture grayscale distribution and local spatial structures. |
+| `text_feature_extraction.py` | Implements semantic label feature extraction and semantic embedding construction for target and background categories. |
+| `time_feature_extraction.py` | Implements temporal auxiliary feature extraction to model inter-frame motion continuity and temporal variation characteristics of infrared targets. |
+| `spectrum_feature_extraction.py` | Implements spectral auxiliary feature extraction to enhance target-background discrimination using spectral response characteristics. |
+| `transformer_network.py` | Transformer-based feature modeling module used for spectral sequence encoding and feature interaction learning. |
 
 ### Background Modeling and Reconstruction
 
 | File | Description |
 |---|---|
-| `background_model.py` | Implements the background feature modeling module. It constructs background feature mappings under the GZSL framework and updates background representations using newly identified unseen categories. |
-| `background_reconstruction.py` | Implements the semantic-pixel background reconstruction module. It includes semantic-guided coarse reconstruction, soft-mask generation, residual refinement, pseudo-ground-truth generation, confidence-map estimation, and confidence-weighted reconstruction loss. |
+| `background_model.py` | Implements the GZSL-based background feature modeling module, including semantic mapping, background representation learning, and unseen background category expansion. |
+| `background_reconstruction.py` | Implements semantic-pixel background reconstruction, including semantic-guided coarse reconstruction, soft-mask generation, residual refinement, pseudo-ground-truth generation, confidence-map estimation, and confidence-weighted reconstruction loss. |
 
-### Suppression, Analysis, and Preprocessing
+### Analysis and Preprocessing
 
 | File | Description |
 |---|---|
-| `physical_feature_analysis.py` | Performs physical auxiliary feature analysis. It extracts image, temporal, spectral, and spectral-temporal features, generates t-SNE visualizations, and computes feature separability metrics such as Fisher Ratio, Silhouette Score, and Inter/Intra Class Distance Ratio. |
-| `bmp-jpg.py` | Converts image formats and performs simple preprocessing for infrared image inputs. |
+| `physical_feature_analysis.py` | Performs physical auxiliary feature analysis, including t-SNE visualization and quantitative separability evaluation using Fisher Ratio, Silhouette Score, and Inter/Intra Class Distance Ratio. |
+| `bmp-jpg.py` | Performs infrared image format conversion and basic preprocessing operations. |
+
+---
+
+## Methodology Correspondence
+
+| Paper Module | Corresponding Code |
+|---|---|
+| Image Feature and Label Semantic Feature Acquisition | `image_feature_extraction.py`, `text_feature_extraction.py`, `model.py` |
+| Auxiliary Features Acquisition | `time_feature_extraction.py`, `spectrum_feature_extraction.py`, `transformer_network.py` |
+| Background Feature Model Establishment based on GZSL | `background_model.py`, `model.py` |
+| Semantic-Pixel Background Reconstruction | `background_reconstruction.py` |
+| Background Suppression | `test-zero shot.py`, `con_test.py` |
+| Physical Interpretability Analysis | `physical_feature_analysis.py` |
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/yourname/BMS-MFZS.git
+cd BMS-MFZS
+
+conda create -n bms_mfzs python=3.10
+conda activate bms_mfzs
+
+pip install -r requirements.txt
+```
+
+Recommended environment:
+
+```text
+Python >= 3.9
+PyTorch >= 1.12
+CUDA >= 11.3
+```
+
+Main dependencies:
+
+```text
+torch
+torchvision
+numpy
+opencv-python
+Pillow
+matplotlib
+scikit-learn
+transformers
+tqdm
+```
+
+---
+
+## Data Preparation
+
+A typical dataset structure is organized as:
+
+```text
+dataset/
+│
+├── images/
+│   ├── 0001.jpg
+│   ├── 0002.jpg
+│   └── ...
+│
+├── labels/
+│   ├── 0001.json
+│   ├── 0002.json
+│   └── ...
+│
+└── auxiliary/
+    ├── temporal/
+    └── spectral/
+```
+
+For public infrared small-target datasets such as SIRST and IRSTD-1K, temporal and spectral auxiliary information is unavailable. In these cases, the missing auxiliary modalities can be replaced using placeholder vectors during inference.
+
+---
+
+## Training
+
+Run:
+
+```bash
+python train.py
+```
+
+Before training, please modify the dataset paths and checkpoint saving paths in `train.py`.
+
+Typical settings include:
+
+```python
+image_dir = "path/to/images"
+json_dir = "path/to/labels"
+save_path = "checkpoints/pretrained_model.pth"
+```
+
+---
+
+## Testing
+
+Run:
+
+```bash
+python "test-zero shot.py"
+```
+
+Typical settings include:
+
+```python
+model_path = "checkpoints/pretrained_model.pth"
+test_image_dir = "path/to/test/images"
+result_dir = "demo/suppression_results"
+```
+
+---
+
+## Background Reconstruction
+
+The semantic-pixel background reconstruction module is implemented in:
+
+```text
+background_reconstruction.py
+```
+
+This module includes:
+
+- Semantic-guided coarse background reconstruction
+- Soft-mask generation
+- Residual-based fine reconstruction
+- Non-local pseudo-ground-truth generation
+- Temporal pseudo-ground-truth generation
+- Confidence-weighted reconstruction loss
+- Adaptive infrared background suppression
+
+Example usage:
+
+```python
+from background_reconstruction import SemanticPixelBackgroundReconstruction
+
+reconstructor = SemanticPixelBackgroundReconstruction(kappa=5.0)
+
+coarse_background, mask, refined_background = reconstructor(
+    image=image_tensor,
+    pixel_features=feature_tensor,
+    background_bank=background_feature_bank
+)
+```
+
+---
+
+## Physical Feature Analysis
+
+Run:
+
+```bash
+python physical_feature_analysis.py \
+  --image_dir "path/to/images" \
+  --json_dir "path/to/labels" \
+  --model_path "checkpoints/pretrained_model.pth" \
+  --save_dir "results/physical_analysis"
+```
+
+This script generates:
+
+```text
+physical_feature_tsne.png
+physical_separability_metrics.csv
+```
+
+Supported feature spaces include:
+
+- Base-model feature space
+- Temporal-only feature space
+- Spectral-only feature space
+- Spectral-temporal feature space
+
+Supported quantitative metrics include:
+
+- Fisher Ratio
+- Silhouette Score
+- Inter/Intra Class Distance Ratio
+
+---
+
+## Evaluation Metrics
+
+The repository supports the following infrared background suppression metrics:
+
+| Metric | Description |
+|---|---|
+| BSF | Background Suppression Factor |
+| SCR | Signal-to-Clutter Ratio |
+| CNR | Contrast-to-Noise Ratio |
+| CG | Contrast Gain |
+| PSNR | Peak Signal-to-Noise Ratio |
+| SSIM | Structural Similarity |
+| MAE | Mean Absolute Error |
+| FSIM | Feature Similarity |
+| BRR | Background Retention Rate |
+
+---
+
+## Dataset and Simulation Notes
+
+The experiments in the paper include:
+
+- Simulated infrared datasets
+- Semi-physical simulation datasets
+- Public infrared sequence datasets
+- Public infrared small-target datasets
+
+The complete semi-physical simulation dataset and raw measurement data are not fully released in the current version. Representative configuration examples and demo samples will be gradually organized.
+
+Released configuration examples may include:
+
+- Background type
+- Target size
+- Target intensity range
+- Motion pattern
+- Initial SCR/SNR settings
+- Star-field density settings
+- Noise perturbation settings
+
+---
+
+## Public Dataset Validation
+
+This repository supports evaluation on public infrared small-target datasets, including:
+
+- SIRST
+- IRSTD-1K
+
+These datasets are mainly used to evaluate BMS-MFZS under missing auxiliary modality conditions because they only provide single-frame infrared images without temporal or spectral auxiliary information.
+
+---
+
+## Notes
+
+This repository provides the core implementation for academic reproducibility. Some large-scale data generation scripts, raw semi-physical measurements, and internal preprocessing pipelines are not included in the current version.
+
+---
+
+## Citation
+
+```bibtex
+@article{BMSMFZS2026,
+  title={BMS-MFZS: Background Modeling and Suppression based on Multi-Feature Generalized Zero-Shot Learning for Remote Sensing Infrared Images},
+  author={Author Name},
+  journal={IEEE Transactions on Geoscience and Remote Sensing},
+  year={2026}
+}
+```
+
+---
+
+## License
+
+This project is released for academic research only.
