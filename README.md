@@ -156,32 +156,6 @@ tqdm
 
 ---
 
-## Data Preparation
-
-A typical dataset structure is organized as:
-
-```text
-dataset/
-│
-├── images/
-│   ├── 0001.jpg
-│   ├── 0002.jpg
-│   └── ...
-│
-├── labels/
-│   ├── 0001.json
-│   ├── 0002.json
-│   └── ...
-│
-└── auxiliary/
-    ├── temporal/
-    └── spectral/
-```
-
-For public infrared small-target datasets such as SIRST and IRSTD-1K, temporal and spectral auxiliary information is unavailable. In these cases, the missing auxiliary modalities can be replaced using placeholder vectors during inference.
-
----
-
 ## Training
 
 Run:
@@ -327,38 +301,3 @@ Released configuration examples may include:
 - Star-field density settings
 - Noise perturbation settings
 
----
-
-## Public Dataset Validation
-
-This repository supports evaluation on public infrared small-target datasets, including:
-
-- SIRST
-- IRSTD-1K
-
-These datasets are mainly used to evaluate BMS-MFZS under missing auxiliary modality conditions because they only provide single-frame infrared images without temporal or spectral auxiliary information.
-
----
-
-## Notes
-
-This repository provides the core implementation for academic reproducibility. Some large-scale data generation scripts, raw semi-physical measurements, and internal preprocessing pipelines are not included in the current version.
-
----
-
-## Citation
-
-```bibtex
-@article{BMSMFZS2026,
-  title={BMS-MFZS: Background Modeling and Suppression based on Multi-Feature Generalized Zero-Shot Learning for Remote Sensing Infrared Images},
-  author={Author Name},
-  journal={IEEE Transactions on Geoscience and Remote Sensing},
-  year={2026}
-}
-```
-
----
-
-## License
-
-This project is released for academic research only.
