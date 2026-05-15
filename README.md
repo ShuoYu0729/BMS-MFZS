@@ -1,18 +1,14 @@
 # BMS-MFZS
 
-Background Modeling and Suppression based on Multi-Feature Generalized Zero-Shot Learning for infrared weak-target images.
-
 ---
 
 ## Introduction
 
 Reliable background suppression remains a key challenge in infrared imaging for space and aerial scientific visual learning. Infrared images are often affected by environmental variability, radiometric inconsistency, sensor noise, non-uniform background radiation, and star-like interference. These factors make it difficult for conventional models to learn stable background characteristics and maintain robust target-background discrimination.
 
-This repository provides the core implementation of **BMS-MFZS**, a background modeling and suppression method based on **Multi-Feature Generalized Zero-Shot Learning**. The proposed method introduces Generalized Zero-Shot Learning into infrared background modeling. By using target features and seen background features, the model infers background representations and suppresses the influence of complex backgrounds on target recognition.
+This repository provides the core implementation of **BMS-MFZS**, a background modeling and suppression method based on **Multi-Feature Generalized Zero-Shot Learning**. The proposed method introduces Generalized Zero-Shot Learning into infrared background modeling. By jointly utilizing image features, semantic embeddings, and physical auxiliary information, the model learns transferable background representations and improves unseen-background discrimination capability under complex infrared conditions.
 
 The method also introduces temporal and spectral physical features as auxiliary information within the GZSL framework. These auxiliary features improve target-background discrimination by providing motion continuity and physical response differences. A joint semantic-pixel background reconstruction module is further designed to combine global semantic background modeling with local pixel-level refinement.
-
-The released code includes the main model, training and testing scripts, physical auxiliary feature analysis, semantic-pixel background reconstruction, and background suppression evaluation.
 
 ---
 
@@ -40,7 +36,7 @@ BMS-MFZS/
 │
 ├── train.py
 ├── model.py
-├── test-zero shot.py
+├── test_zero_shot.py
 ├── con_test.py
 │
 ├── image_feature_extraction.py
@@ -77,7 +73,7 @@ The following table gives a brief description of the released code files and the
 |---|---|
 | `model.py` | Defines the main BMS-MFZS framework, including image feature extraction, semantic embedding, temporal and spectral auxiliary feature fusion, GZSL-based background modeling, and adaptive background suppression. |
 | `train.py` | Training script of BMS-MFZS. It loads training data, builds the network, computes optimization losses, updates parameters, and saves trained checkpoints. |
-| `test-zero shot.py` | Testing and generalized zero-shot inference script. It performs background modeling, unseen-category inference, and infrared background suppression evaluation. |
+| `test_zero_shot.py` | Testing and generalized zero-shot inference script. It performs background modeling, unseen-category inference, and infrared background suppression evaluation. |
 | `con_test.py` | Evaluation script for suppression performance comparison. It generates suppression results and computes contrast-related evaluation metrics. |
 | `utils.py` | Utility functions used for data loading, feature processing, model initialization, evaluation, and result saving. |
 
@@ -115,7 +111,7 @@ The following table gives a brief description of the released code files and the
 | Auxiliary Features Acquisition | `time_feature_extraction.py`, `spectrum_feature_extraction.py`, `transformer_network.py` |
 | Background Feature Model Establishment based on GZSL | `background_model.py`, `model.py` |
 | Semantic-Pixel Background Reconstruction | `background_reconstruction.py` |
-| Background Suppression | `test-zero shot.py`, `con_test.py` |
+| Background Suppression | `test_zero_shot.py`, `con_test.py` |
 | Physical Interpretability Analysis | `physical_feature_analysis.py` |
 
 ---
@@ -181,7 +177,7 @@ save_path = "checkpoints/pretrained_model.pth"
 Run:
 
 ```bash
-python "test-zero shot.py"
+python "test_zero_shot.py"
 ```
 
 Typical settings include:
@@ -238,13 +234,6 @@ python physical_feature_analysis.py \
   --json_dir "path/to/labels" \
   --model_path "checkpoints/pretrained_model.pth" \
   --save_dir "results/physical_analysis"
-```
-
-This script generates:
-
-```text
-physical_feature_tsne.png
-physical_separability_metrics.csv
 ```
 
 Supported feature spaces include:
