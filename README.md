@@ -23,6 +23,7 @@ BMS-MFZS contains the following modules:
 - Semantic-pixel background reconstruction
 - Adaptive infrared background suppression
 - Physical feature-space interpretability analysis
+- Local spatio-temporal contrast-based background region identification
 
 ---
 
@@ -47,6 +48,7 @@ BMS-MFZS/
 │
 ├── background_model.py
 ├── background_reconstruction.py
+├── local_contrast.py
 ├── physical_feature_analysis.py
 │
 ├── utils.py
@@ -93,6 +95,7 @@ The following table gives a brief description of the released code files and the
 |---|---|
 | `background_model.py` | Implements the GZSL-based background feature modeling module, including semantic mapping, background representation learning, and unseen background category expansion. |
 | `background_reconstruction.py` | Implements semantic-pixel background reconstruction, including semantic-guided coarse reconstruction, soft-mask generation, residual refinement, pseudo-ground-truth generation, confidence-map estimation, and confidence-weighted reconstruction loss. |
+| `local_contrast.py` | Implements the double-window local spatio-temporal contrast strategy for candidate background-region identification before semantic-pixel background reconstruction and background feature mapping.|
 
 ### Analysis and Preprocessing
 
@@ -109,7 +112,7 @@ The following table gives a brief description of the released code files and the
 |---|---|
 | Image Feature and Label Semantic Feature Acquisition | `image_feature_extraction.py`, `text_feature_extraction.py`, `model.py` |
 | Auxiliary Features Acquisition | `time_feature_extraction.py`, `spectrum_feature_extraction.py`, `transformer_network.py` |
-| Background Feature Model Establishment based on GZSL | `background_model.py`, `model.py` |
+| Background Feature Model Establishment based on GZSL | `background_model.py`, `model.py`, `local_contrast.py` |
 | Semantic-Pixel Background Reconstruction | `background_reconstruction.py` |
 | Background Suppression | `test_zero_shot.py`, `con_test.py` |
 | Physical Interpretability Analysis | `physical_feature_analysis.py` |
