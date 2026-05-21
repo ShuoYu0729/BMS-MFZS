@@ -14,7 +14,7 @@ The method also introduces temporal and spectral physical features as auxiliary 
 
 ## Main Components
 
-BMS-MFZS contains the following modules:
+BMS-MFZS framework contains the following modules:
 
 - Image feature and semantic label feature acquisition
 - Temporal auxiliary feature extraction
