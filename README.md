@@ -254,24 +254,6 @@ Supported quantitative metrics include:
 
 ---
 
-## Evaluation Metrics
-
-The repository supports the following infrared background suppression metrics:
-
-| Metric | Description |
-|---|---|
-| BSF | Background Suppression Factor |
-| SCR | Signal-to-Clutter Ratio |
-| CNR | Contrast-to-Noise Ratio |
-| CG | Contrast Gain |
-| PSNR | Peak Signal-to-Noise Ratio |
-| SSIM | Structural Similarity |
-| MAE | Mean Absolute Error |
-| FSIM | Feature Similarity |
-| BRR | Background Retention Rate |
-
----
-
 ## Dataset and Simulation Notes
 
 The experiments in the paper include:
@@ -280,16 +262,3 @@ The experiments in the paper include:
 - Semi-physical simulation datasets
 - Public infrared sequence datasets
 - Public infrared small-target datasets
-
-The complete semi-physical simulation dataset and raw measurement data are not fully released in the current version. Representative configuration examples and demo samples will be gradually organized.
-
-Released configuration examples may include:
-
-- Background type
-- Target size
-- Target intensity range
-- Motion pattern
-- Initial SCR/SNR settings
-- Star-field density settings
-- Noise perturbation settings
-
