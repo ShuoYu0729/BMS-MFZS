@@ -260,5 +260,5 @@ The experiments in the paper include:
 
 - Simulated infrared datasets
 - Semi-physical simulation datasets
-- Public infrared sequence datasets
+- Public infrared sequence datasets "li yi ran. Space based target simulation dataset[DS/OL]. V1. Science Data Bank, 2024[2026-11-20]. https://doi.org/10.57760/sciencedb.space.02112. DOI:10.57760/sciencedb.space.02112."
 - Public infrared small-target datasets
